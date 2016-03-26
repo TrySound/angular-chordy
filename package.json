@@ -1,0 +1,30 @@
+{
+  "name": "angular-chordy",
+  "version": "0.0.0",
+  "description": "Accordion module for angular",
+  "main": "dist/angular-chordy.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trysound/angular-chordy.git"
+  },
+  "keywords": [
+    "angular",
+    "accordion"
+  ],
+  "author": "Bogdan Chadkin <trysound@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trysound/angular-chordy/issues"
+  },
+  "homepage": "https://github.com/trysound/angular-chordy#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8",
+    "main-bower-files": "^2.11.1"
+  }
+}

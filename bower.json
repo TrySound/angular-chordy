@@ -1,0 +1,30 @@
+{
+  "name": "angular-chordy",
+  "description": "Accordion module for angular",
+  "main": "dist/angular-chordy.js",
+  "authors": [
+    "Bogdan Chadkin <trysound@yandex.ru>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "accordion"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "homepage": "https://github.com/TrySound",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.3"
+  }
+}
