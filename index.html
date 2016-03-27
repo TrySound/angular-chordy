@@ -83,7 +83,7 @@ function appTemplate() {
 					Some title {{item}}
 					<span class="accordion__pin"
 						ng-class="{'accordion__pin--active': chord.pinned}"
-						ng-click="chord.togglePin($event)">
+						ng-click="chord.pin($event)">
 					</span>
 				</chordy-title>
 				Some content {{item}}
