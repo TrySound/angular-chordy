@@ -41,6 +41,11 @@ angular.module('app', ['chordy']);
 		disabled="true">
 		<chord-title>
 			Title markup will override title attribute
+			<span class="chordy-pin"
+				ng-class="{'chordy-pin--active': chord.pinned}"
+				ng-click="chord.togglePin($event)">
+				Pin
+			</span>
 		</chord-title>
 	</chordy-chord>
 </chordy-set>
@@ -49,6 +54,27 @@ angular.module('app', ['chordy']);
 `chordy-chord` opened, pinned and disabled options are `false` by default.
 
 `chordy-set`, `chordy-chord` and `chordy-title` are custom elements. You should add set `display` style manually.
+
+## chord
+
+`chord` controller instance available in every `chord-title` element.
+
+### chord states
+
+- chord.opened
+- chord.pinned
+- chord.disabled
+
+### chord methods
+
+- chord.open()
+- chord.close()
+- chord.toggle()
+- chord.pin()
+- chord.unpin()
+- chord.togglePin()
+
+You can pass $event in every method to stop click propagation.
 
 
 # License
