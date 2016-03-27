@@ -4,6 +4,7 @@
   "description": "Accordion module for angular",
   "main": "dist/angular-chordy.js",
   "scripts": {
+    "pretest": "gulp build",
     "test": "karma start"
   },
   "repository": {
