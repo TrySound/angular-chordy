@@ -1,6 +1,7 @@
 angular.module('chordy')
 	.directive('chordyTitle', () => {
 		return {
+			restrict: 'E',
 			require: {
 				setCtrl: '^^chordySet',
 				chordCtrl: '^^chordyChord'
