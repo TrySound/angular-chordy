@@ -19,6 +19,7 @@ angular.module('chordy')
 function chordyChordTemplate() {
 	return `
 		<div class="{{$ctrl.setCtrl.classHeading}}"
+			ng-class="{'{{$ctrl.setCtrl.classHeadingOpened}}': $ctrl.opened}"
 			ng-click="$ctrl.toggle()"
 			ng-transclude="title">
 			{{$ctrl.title}}

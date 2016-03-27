@@ -11,6 +11,8 @@
 
 .accordion {
 	display: block;
+	max-width: 800px;
+	margin: auto;
 }
 
 .accordion__item {
@@ -24,6 +26,10 @@
 	border: 1px solid #e6e7e8;
 	padding: 10px 15px;
 	cursor: pointer;
+}
+
+.accordion__heading--opened {
+	background: #edeeef;
 }
 
 .accordion__content {
@@ -72,6 +78,7 @@ function appTemplate() {
 		<chordy-set class="accordion"
 			class-chord="accordion__item"
 			class-heading="accordion__heading"
+			class-heading-opened="accordion__heading--opened"
 			class-title="accordion__title"
 			class-content="accordion__content">
 			<chordy-chord ng-repeat="item in [1, 2, 3, 4]">

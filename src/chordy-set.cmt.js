@@ -3,6 +3,7 @@ angular.module('chordy')
 		bindings: {
 			classChord: '@',
 			classHeading: '@',
+			classHeadingOpened: '@',
 			classTitle: '@',
 			classContent: '@'
 		},

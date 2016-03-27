@@ -31,6 +31,7 @@ angular.module('app', ['chordy']);
 	class="chordy-set-class"
 	class-chord="chordy-chord-class"
 	class-heading="chordy-title-container-class"
+	class-heading-opened="chordy-heading-active-state-class"
 	class-title="chordy-title-class"
 	class-content="chordy-content-class">
 	<chordy-chord
