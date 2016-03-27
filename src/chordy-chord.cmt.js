@@ -27,7 +27,8 @@ function chordyChordTemplate() {
 			ng-transclude
 			ng-if="$ctrl.opened || $ctrl.initialized"
 			ng-init="$ctrl.initialized = true"
-			ng-show="$ctrl.opened"></div>
+			ng-show="$ctrl.opened">
+		</div>
 	`;
 }
 
