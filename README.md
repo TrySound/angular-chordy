@@ -43,7 +43,7 @@ angular.module('app', ['chordy']);
 			Title markup will override title attribute
 			<span class="chordy-pin"
 				ng-class="{'chordy-pin--active': chord.pinned}"
-				ng-click="chord.togglePin($event)">
+				ng-click="chord.pin($event)">
 				Pin
 			</span>
 		</chord-title>
@@ -67,14 +67,10 @@ angular.module('app', ['chordy']);
 
 ### chord methods
 
-- `chord.open()`
-- `chord.close()`
-- `chord.toggle()`
-- `chord.pin()`
-- `chord.unpin()`
-- `chord.togglePin()`
+- `chord.toggle($event, force)`
+- `chord.pin($event, force)`
 
-You can pass `$event` in every method to stop click propagation.
+Pass null or `$event` to stop click propagation. `force` is boolean value and can be ommited to invert current state.
 
 
 # License

@@ -1,51 +1,76 @@
 'use strict';
 
 describe('chordy-chord controller', () => {
-	let $componentController, scope;
+	let component;
 
 	beforeEach(module('chordy'));
 
 	beforeEach(inject(($rootScope, _$componentController_) => {
-		scope = $rootScope.$new();
-		$componentController = _$componentController_;
-	}));
-
-	it('should have set-like methods', () => {
-		const methods = [
-			'open',
-			'close',
-			'toggle',
-			'pin',
-			'unpin',
-			'togglePin'
-		];
-		const fakeSetController = {
-			calls: 0
-		};
-		methods.forEach(method => {
-			fakeSetController[method] = function () {
-				this.calls += 1;
-			}
+		const scope = $rootScope.$new();
+		const $componentController = _$componentController_;
+		const setComponent = $componentController('chordySet', {
+			$scope: scope
 		});
-		const component = $componentController('chordyChord', {
+		component = $componentController('chordyChord', {
 			$scope: scope,
 			$element: angular.element('<div></div>')
 		}, {
-			setCtrl: fakeSetController
+			setCtrl: setComponent
 		});
-		methods.forEach(method => {
-			expect(typeof component[method]).toBe('function');
-			let calls = 0;
-			component[method]({
-				stopPropagation: () => {
-					calls += 1;
-				}
-			});
-			expect(calls).toBe(1);
-			expect(() => {
-				component[method]();
-			}).not.toThrow();
-		});
-		expect(fakeSetController.calls).toBe(methods.length * 2);
+	}));
+
+	it('should have toggle method', () => {
+		expect(component.opened).toBe(undefined);
+		// toggle
+		component.toggle();
+		expect(component.opened).toBe(true);
+		component.toggle(null, true);
+		expect(component.opened).toBe(true);
+		component.toggle();
+		// force the same
+		expect(component.opened).toBe(false);
+		component.toggle(null, false);
+		expect(component.opened).toBe(false);
+		// force reverted
+		component.toggle(null, true);
+		expect(component.opened).toBe(true);
+		component.toggle(null, false);
+		expect(component.opened).toBe(false);
+	});
+
+	it('should have pin method', () => {
+		expect(component.pinned).toBe(undefined);
+		// pin
+		component.pin();
+		expect(component.pinned).toBe(true);
+		component.pin(null, true);
+		expect(component.pinned).toBe(true);
+		component.pin();
+		// force the same
+		expect(component.pinned).toBe(false);
+		component.pin(null, false);
+		expect(component.pinned).toBe(false);
+		// force reverted
+		component.pin(null, true);
+		expect(component.pinned).toBe(true);
+		component.pin(null, false);
+		expect(component.pinned).toBe(false);
+	});
+
+	it('should be able to pass $event as first argument to stop propagation', () => {
+		let calls = 0;
+		const $event = {
+			stopPropagation: () => {
+				calls += 1;
+			}
+		};
+		component.toggle($event);
+		component.toggle($event, true);
+		component.toggle($event, false);
+		component.pin($event);
+		component.pin($event, true);
+		component.pin($event, false);
+
+		expect(calls).toBe(6);
 	});
 });

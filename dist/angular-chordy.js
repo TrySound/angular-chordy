@@ -32,12 +32,8 @@
 		angular.extend(this, {
 			$onInit: init,
 			$onDestroy: destroy,
-			open: open,
-			close: close,
 			toggle: toggle,
-			pin: pin,
-			unpin: unpin,
-			togglePin: togglePin
+			pin: pin
 		});
 
 		var ctrl = this;
@@ -51,46 +47,30 @@
 			ctrl.setCtrl.remove(ctrl);
 		}
 
-		function open($event) {
+		function toggle($event, force) {
 			if ($event) {
 				$event.stopPropagation();
 			}
-			ctrl.setCtrl.open(ctrl);
+			if (force === true) {
+				ctrl.setCtrl.open(ctrl);
+			} else if (force === false) {
+				ctrl.setCtrl.close(ctrl);
+			} else {
+				ctrl.setCtrl.toggle(ctrl);
+			}
 		}
 
-		function close($event) {
+		function pin($event, force) {
 			if ($event) {
 				$event.stopPropagation();
 			}
-			ctrl.setCtrl.close(ctrl);
-		}
-
-		function toggle($event) {
-			if ($event) {
-				$event.stopPropagation();
+			if (force === true) {
+				ctrl.setCtrl.pin(ctrl);
+			} else if (force === false) {
+				ctrl.setCtrl.unpin(ctrl);
+			} else {
+				ctrl.setCtrl.togglePin(ctrl);
 			}
-			ctrl.setCtrl.toggle(ctrl);
-		}
-
-		function pin($event) {
-			if ($event) {
-				$event.stopPropagation();
-			}
-			ctrl.setCtrl.pin(ctrl);
-		}
-
-		function unpin($event) {
-			if ($event) {
-				$event.stopPropagation();
-			}
-			ctrl.setCtrl.unpin(ctrl);
-		}
-
-		function togglePin($event) {
-			if ($event) {
-				$event.stopPropagation();
-			}
-			ctrl.setCtrl.togglePin(ctrl);
 		}
 	}
 
