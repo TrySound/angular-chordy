@@ -47,6 +47,8 @@ angular.module('app', ['chordy']);
 
 `chordy-chord` opened, pinned and disabled options are `false` by default.
 
+`chordy-set`, `chordy-chord` and `chordy-title` are custom elements. You should add set `display` style manually.
+
 
 # License
 
