@@ -61,20 +61,20 @@ angular.module('app', ['chordy']);
 
 ### chord states
 
-- chord.opened
-- chord.pinned
-- chord.disabled
+- `chord.opened`
+- `chord.pinned`
+- `chord.disabled`
 
 ### chord methods
 
-- chord.open()
-- chord.close()
-- chord.toggle()
-- chord.pin()
-- chord.unpin()
-- chord.togglePin()
+- `chord.open()`
+- `chord.close()`
+- `chord.toggle()`
+- `chord.pin()`
+- `chord.unpin()`
+- `chord.togglePin()`
 
-You can pass $event in every method to stop click propagation.
+You can pass `$event` in every method to stop click propagation.
 
 
 # License
