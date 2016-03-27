@@ -23,7 +23,7 @@
 	});
 
 	function chordyChordTemplate() {
-		return '\n\t\t<div class="{{$ctrl.setCtrl.classHeading}}"\n\t\t\tng-click="$ctrl.toggle()"\n\t\t\tng-transclude="title">\n\t\t\t{{$ctrl.title}}\n\t\t</div>\n\t\t<div class="{{$ctrl.setCtrl.classContent}}"\n\t\t\tng-transclude\n\t\t\tng-if="$ctrl.opened || $ctrl.initialized"\n\t\t\tng-init="$ctrl.initialized = true"\n\t\t\tng-show="$ctrl.opened">\n\t\t</div>\n\t';
+		return '\n\t\t<div class="{{$ctrl.setCtrl.classHeading}}"\n\t\t\tng-class="{\'{{$ctrl.setCtrl.classHeadingOpened}}\': $ctrl.opened}"\n\t\t\tng-click="$ctrl.toggle()"\n\t\t\tng-transclude="title">\n\t\t\t{{$ctrl.title}}\n\t\t</div>\n\t\t<div class="{{$ctrl.setCtrl.classContent}}"\n\t\t\tng-transclude\n\t\t\tng-if="$ctrl.opened || $ctrl.initialized"\n\t\t\tng-init="$ctrl.initialized = true"\n\t\t\tng-show="$ctrl.opened">\n\t\t</div>\n\t';
 	}
 
 	ChordyChordController.$inject = ['$element'];
@@ -98,6 +98,7 @@
 		bindings: {
 			classChord: '@',
 			classHeading: '@',
+			classHeadingOpened: '@',
 			classTitle: '@',
 			classContent: '@'
 		},
@@ -212,6 +213,7 @@
 
 	angular.module('chordy').directive('chordyTitle', function () {
 		return {
+			restrict: 'E',
 			require: {
 				setCtrl: '^^chordySet',
 				chordCtrl: '^^chordyChord'
