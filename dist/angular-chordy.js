@@ -90,8 +90,6 @@
 			chords: [],
 			add: add,
 			remove: remove,
-			enable: enable,
-			disable: disable,
 			open: open,
 			close: close,
 			toggle: toggle,
@@ -108,18 +106,6 @@
 			var index = this.chords.indexOf(chord);
 			if (index !== -1) {
 				this.chords.splice(index, 1);
-			}
-		}
-
-		function enable(chord) {
-			if (chord.disabled) {
-				chord.disabled = false;
-			}
-		}
-
-		function disable(chord) {
-			if (!chord.disabled) {
-				chord.disabled = true;
 			}
 		}
 

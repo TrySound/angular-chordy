@@ -15,8 +15,6 @@ function ChordySetController() {
 		chords: [],
 		add,
 		remove,
-		enable,
-		disable,
 		open,
 		close,
 		toggle,
@@ -33,18 +31,6 @@ function ChordySetController() {
 		var index = this.chords.indexOf(chord);
 		if (index !== -1) {
 			this.chords.splice(index, 1);
-		}
-	}
-
-	function enable(chord) {
-		if (chord.disabled) {
-			chord.disabled = false;
-		}
-	}
-
-	function disable(chord) {
-		if (!chord.disabled) {
-			chord.disabled = true;
 		}
 	}
 

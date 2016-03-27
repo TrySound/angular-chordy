@@ -5,9 +5,8 @@ describe('chordy-chord controller', () => {
 
 	beforeEach(module('chordy'));
 
-	beforeEach(inject(($rootScope, _$componentController_) => {
+	beforeEach(inject(($rootScope, $componentController) => {
 		const scope = $rootScope.$new();
-		const $componentController = _$componentController_;
 		const setComponent = $componentController('chordySet', {
 			$scope: scope
 		});
@@ -57,6 +56,36 @@ describe('chordy-chord controller', () => {
 		expect(component.pinned).toBe(false);
 	});
 
+	it('should disable chord', () => {
+		component.disabled = true;
+		component.toggle();
+		expect(component.opened).toBe(undefined);
+		component.toggle(null, true);
+		expect(component.opened).toBe(undefined);
+		component.toggle(null, false);
+		expect(component.opened).toBe(undefined);
+		component.pin();
+		expect(component.pinned).toBe(undefined);
+		component.pin(null, true);
+		expect(component.pinned).toBe(undefined);
+		component.pin(null, false);
+		expect(component.pinned).toBe(undefined);
+
+		component.disabled = false;
+		component.toggle();
+		expect(component.opened).toBe(true);
+		component.toggle(null, false);
+		expect(component.opened).toBe(false);
+		component.toggle(null, true);
+		expect(component.opened).toBe(true);
+		component.pin();
+		expect(component.pinned).toBe(true);
+		component.pin(null, false);
+		expect(component.pinned).toBe(false);
+		component.pin(null, true);
+		expect(component.pinned).toBe(true);
+	});
+
 	it('should be able to pass $event as first argument to stop propagation', () => {
 		let calls = 0;
 		const $event = {
@@ -64,6 +93,7 @@ describe('chordy-chord controller', () => {
 				calls += 1;
 			}
 		};
+
 		component.toggle($event);
 		component.toggle($event, true);
 		component.toggle($event, false);

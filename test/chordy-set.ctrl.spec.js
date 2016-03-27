@@ -135,23 +135,4 @@ describe('chordy-set controller', () => {
 			{ opened: false, pinned: false }
 		]);
 	});
-
-	it('should enable and disable chord', () => {
-		const chord1 = { opened: false, pinned: false, disabled: false };
-		const chord2 = { opened: true, pinned: true, disabled: true };
-		component.add(chord1);
-		component.disable(chord1);
-		component.open(chord1);
-		expect(chord1).toEqual({ opened: false, pinned: false, disabled: true });
-		component.pin(chord1);
-		expect(chord1).toEqual({ opened: false, pinned: false, disabled: true });
-		component.disable(chord2);
-		component.close(chord2);
-		expect(chord2).toEqual({ opened: true, pinned: true, disabled: true });
-		component.unpin(chord2);
-		expect(chord2).toEqual({ opened: true, pinned: true, disabled: true });
-		component.enable(chord1);
-		component.open(chord1);
-		expect(chord1).toEqual({ opened: true, pinned: false, disabled: false });
-	});
 });
