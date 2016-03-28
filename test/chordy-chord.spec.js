@@ -1,89 +1,59 @@
 'use strict';
 
 describe('chordy-chord controller', () => {
-	let component;
+	let component, fakeSet;
 
 	beforeEach(module('chordy'));
 
 	beforeEach(inject(($rootScope, $componentController) => {
 		const scope = $rootScope.$new();
-		const setComponent = $componentController('chordySet', {
-			$scope: scope
-		});
+		function fakeMethod(method) {
+			return function () {
+				this.lastCalled = method;
+			};
+		}
+		fakeSet = {
+			lastCalled: null,
+			add: fakeMethod('add'),
+			remove: fakeMethod('remove'),
+			open: fakeMethod('open'),
+			close: fakeMethod('close'),
+			toggle: fakeMethod('toggle'),
+			pin: fakeMethod('pin'),
+			unpin: fakeMethod('unpin'),
+			togglePin: fakeMethod('togglePin')
+		};
 		component = $componentController('chordyChord', {
 			$scope: scope,
 			$element: angular.element('<div></div>')
 		}, {
-			setCtrl: setComponent
+			setCtrl: fakeSet
 		});
 	}));
 
+	it('should init and destroy', () => {
+		component.$onInit();
+		expect(fakeSet.lastCalled).toBe('add');
+		component.$onDestroy();
+		expect(fakeSet.lastCalled).toBe('remove');
+	});
+
 	it('should have toggle method', () => {
-		expect(component.opened).toBe(undefined);
-		// toggle
 		component.toggle();
-		expect(component.opened).toBe(true);
+		expect(fakeSet.lastCalled).toBe('toggle');
 		component.toggle(null, true);
-		expect(component.opened).toBe(true);
-		component.toggle();
-		// force the same
-		expect(component.opened).toBe(false);
+		expect(fakeSet.lastCalled).toBe('open');
 		component.toggle(null, false);
-		expect(component.opened).toBe(false);
-		// force reverted
-		component.toggle(null, true);
-		expect(component.opened).toBe(true);
-		component.toggle(null, false);
-		expect(component.opened).toBe(false);
+		expect(fakeSet.lastCalled).toBe('close');
 	});
 
 	it('should have pin method', () => {
-		expect(component.pinned).toBe(undefined);
-		// pin
 		component.pin();
-		expect(component.pinned).toBe(true);
+		expect(fakeSet.lastCalled).toBe('togglePin');
 		component.pin(null, true);
-		expect(component.pinned).toBe(true);
-		component.pin();
-		// force the same
-		expect(component.pinned).toBe(false);
+		expect(fakeSet.lastCalled).toBe('pin');
 		component.pin(null, false);
-		expect(component.pinned).toBe(false);
-		// force reverted
-		component.pin(null, true);
-		expect(component.pinned).toBe(true);
-		component.pin(null, false);
-		expect(component.pinned).toBe(false);
-	});
-
-	it('should disable chord', () => {
-		component.disabled = true;
-		component.toggle();
-		expect(component.opened).toBe(undefined);
-		component.toggle(null, true);
-		expect(component.opened).toBe(undefined);
-		component.toggle(null, false);
-		expect(component.opened).toBe(undefined);
-		component.pin();
-		expect(component.pinned).toBe(undefined);
-		component.pin(null, true);
-		expect(component.pinned).toBe(undefined);
-		component.pin(null, false);
-		expect(component.pinned).toBe(undefined);
-
-		component.disabled = false;
-		component.toggle();
-		expect(component.opened).toBe(true);
-		component.toggle(null, false);
-		expect(component.opened).toBe(false);
-		component.toggle(null, true);
-		expect(component.opened).toBe(true);
-		component.pin();
-		expect(component.pinned).toBe(true);
-		component.pin(null, false);
-		expect(component.pinned).toBe(false);
-		component.pin(null, true);
-		expect(component.pinned).toBe(true);
+		expect(fakeSet.lastCalled).toBe('unpin');
 	});
 
 	it('should be able to pass $event as first argument to stop propagation', () => {
@@ -93,14 +63,17 @@ describe('chordy-chord controller', () => {
 				calls += 1;
 			}
 		};
-
 		component.toggle($event);
+		expect(calls).toBe(1);
 		component.toggle($event, true);
+		expect(calls).toBe(2);
 		component.toggle($event, false);
+		expect(calls).toBe(3);
 		component.pin($event);
+		expect(calls).toBe(4);
 		component.pin($event, true);
+		expect(calls).toBe(5);
 		component.pin($event, false);
-
 		expect(calls).toBe(6);
 	});
 });

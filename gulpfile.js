@@ -3,7 +3,7 @@ var concat = require('gulp-concat');
 var babel = require('gulp-babel');
 var Server = require('karma').Server;
 
-gulp.task('build', function () {
+gulp.task('build', ['test'], function () {
 	return gulp.src(['src/*.mdl.js', 'src/*.js'])
 		.pipe(concat('angular-chordy.js'))
 		.pipe(babel({

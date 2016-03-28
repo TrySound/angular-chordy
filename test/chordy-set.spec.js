@@ -135,4 +135,35 @@ describe('chordy-set controller', () => {
 			{ opened: false, pinned: false }
 		]);
 	});
+
+	it('should disable chord', () => {
+		const chord = { disabled: true };
+		component.add(chord);
+		component.toggle(chord);
+		expect(chord.opened).toBe(undefined);
+		component.open(chord);
+		expect(chord.opened).toBe(undefined);
+		component.close(chord);
+		expect(chord.opened).toBe(undefined);
+		component.togglePin(chord);
+		expect(chord.pinned).toBe(undefined);
+		component.pin(chord);
+		expect(chord.pinned).toBe(undefined);
+		component.unpin(chord);
+		expect(chord.pinned).toBe(undefined);
+
+		chord.disabled = false;
+		component.toggle(chord);
+		expect(chord.opened).toBe(true);
+		component.close(chord);
+		expect(chord.opened).toBe(false);
+		component.open(chord);
+		expect(chord.opened).toBe(true);
+		component.togglePin(chord);
+		expect(chord.pinned).toBe(true);
+		component.unpin(chord);
+		expect(chord.pinned).toBe(false);
+		component.pin(chord);
+		expect(chord.pinned).toBe(true);
+	});
 });
