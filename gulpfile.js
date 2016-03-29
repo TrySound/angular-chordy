@@ -2,10 +2,11 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var babel = require('gulp-babel');
 var Server = require('karma').Server;
+var pkg = require('./package.json');
 
 gulp.task('build', function () {
 	return gulp.src(['src/*.mdl.js', 'src/*.js'])
-		.pipe(concat('angular-chordy.js'))
+		.pipe(concat(pkg.name + '.js'))
 		.pipe(babel({
 			presets: ['es2015'],
 			plugins: [
