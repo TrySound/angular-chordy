@@ -1,6 +1,6 @@
 {
   "name": "angular-chordy",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Accordion module for angular",
   "main": "dist/angular-chordy.js",
   "scripts": {
